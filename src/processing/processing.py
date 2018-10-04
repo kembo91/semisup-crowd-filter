@@ -3,7 +3,7 @@ from src.processing.datasets import SiameseDatagen, ClfDatagen
 
 def process_data(path, method, batch_size, imsize, augment=True):
     method = method.lower()
-    if method is 'siam' or method is 'siamese':
+    if method == 'siam' or method == 'siamese':
         train_dataset = SiameseDatagen(
             os.path.join(path, 'train'),
             batch_size=batch_size,
@@ -29,8 +29,7 @@ def process_data(path, method, batch_size, imsize, augment=True):
             imsize=imsize
         )
         return train_dataset, test_dataset
-    raise ValueError(
-        'Provided method {} is not supported'.format(method)
-    )
-        
-    
+    else:
+        raise ValueError(
+            'Provided method {} is not supported'.format(method)
+        )

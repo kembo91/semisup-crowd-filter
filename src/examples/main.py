@@ -7,7 +7,7 @@ from src.models.model import generate_model
 parser = argparse.ArgumentParser(description='Semisupervised large image dataset filtering for crowdsourced classification')
 
 parser.add_argument('--method', help='data filtering method, choose one: ALL, siamese, GAN, GANM, baseline',
-                    default='ALL')
+                    default='siamese')
 parser.add_argument('--dataset', help='dataset location',
                     default='data')
 parser.add_argument('--arch', help='CNN architecture: resnte, vgg',
@@ -21,7 +21,7 @@ parser.add_argument('--batch_size', help='training batch size',
 parser.add_argument('--imsize', help='image resize size',
                     default=224)
 parser.add_argument('--train', help='requires training',
-                    action='store_true', default=False)
+                    action='store_true', default=True)
 parser.add_argument('--epochs', help='training epochs',
                     default=40)
 
@@ -43,10 +43,6 @@ def main():
         if args.modelpath is '':
             model = train(model, train_gen, test_gen,
                             args.epochs, args.savepath)
-        
-            
-
-
 
 if __name__ == '__main__':
     main()

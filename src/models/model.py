@@ -6,15 +6,13 @@ from keras.layers import Input, Dense, Conv2D, MaxPooling2D, UpSampling2D, Lambd
 from src.utils.utils import euclidean_distance
 from src.utils.losses import contrastive_loss
 
-
-
 def generate_model(method, type, path):
     if path is not '':
         model = load_model(path)
         return model
-    elif method is 'siam' or method is 'siamese':
+    elif method == 'siam' or method == 'siamese':
         return create_siam_model(type)
-    elif method is 'class' or method is 'classification':
+    elif method == 'class' or method == 'classification':
         return create_class_model(type)
     raise ValueError(
         'Specified method {} is not supported'.format(method)
@@ -63,5 +61,5 @@ def create_class_model(type, num_classes=8):
     model.compile(optimizer=adam, loss='categorical_crossentropy')
     return model
     
-def create_gan_model(type):
-    print('TODO')
+#def create_gan_model(type):
+    

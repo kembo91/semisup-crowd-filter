@@ -9,6 +9,7 @@ from src.methods.baseline import process_baseline
 from functools import reduce
 
 def process_methods(methods):
+    print(methods)
     meth = []
     for method in methods:
         method = method.lower()
@@ -32,4 +33,3 @@ def pipeline(dataargs, method):
     outputs = []
     datagen = process_data(**dataargs)
     outputs.append(method(data))
-    
