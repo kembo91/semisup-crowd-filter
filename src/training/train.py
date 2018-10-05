@@ -20,4 +20,5 @@ def train(model, train_set, val_set, epochs, savepath):
         epochs=epochs,
         callbacks=[checkpointer]
     )
+    model = keras.load_model(path)
     return model

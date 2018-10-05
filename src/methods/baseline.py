@@ -5,5 +5,4 @@ def process_baseline(net, testdata, traindata):
     train_preds = net.predict_generator(traindata)
     outdet = OutlierDetector(train_preds, 8)
     connected = outdet.determine_connection(testdata)
-    filtered = testdata[connected]
-    return filtered
+    return [int(x) for x in connected]

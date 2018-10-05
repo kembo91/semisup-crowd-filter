@@ -1,7 +1,7 @@
 import os
-from src.processing.datasets import SiameseDatagen, ClfDatagen
+from src.processing.datasets import SiameseDatagen, generate_data_set
 
-def process_data(path, method, batch_size, imsize, augment=True):
+def process_data(path, method, batch_size, imsize):
     method = method.lower()
     if method == 'siam' or method == 'siamese':
         train_dataset = SiameseDatagen(
@@ -16,15 +16,15 @@ def process_data(path, method, batch_size, imsize, augment=True):
         )
         return train_dataset, test_dataset
     elif method is 'class' or method is 'classification':
-        train_dataset = ClfDatagen(
+        train_dataset = generate_data_set(
             os.path.join(path, 'train'),
-            augment=augment,
+            augment=True,
             batch_size=batch_size,
             imsize=imsize
         )
-        test_dataset = ClfDatagen(
+        test_dataset = generate_data_set(
             os.path.join(path, 'test'),
-            augment=augment,
+            augment=False,
             batch_size=batch_size,
             imsize=imsize
         )

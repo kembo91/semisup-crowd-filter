@@ -14,6 +14,8 @@ def generate_model(method, type, path):
         return create_siam_model(type)
     elif method == 'class' or method == 'classification':
         return create_class_model(type)
+    elif method == 'gan' or method == 'gand':
+        return create_gan_model(type)
     raise ValueError(
         'Specified method {} is not supported'.format(method)
     )
@@ -60,6 +62,9 @@ def create_class_model(type, num_classes=8):
     adam = keras.optimizers.adam(lr=1e-4)
     model.compile(optimizer=adam, loss='categorical_crossentropy')
     return model
+
+def create_gan_model(type):
+    print('gan model to be done')
     
 #def create_gan_model(type):
     

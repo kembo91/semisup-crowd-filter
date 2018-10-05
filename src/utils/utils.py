@@ -31,7 +31,7 @@ class OutlierDetector(object):
     def determine_connection(self, preds):
         distances = self.mean_dist.values()
         rv = []
-        for i ,item in enumerate(preds):
+        for item in preds:
             for center in self.centers:
                 eu_d = euclidean(center, item)
                 for distance in distances:

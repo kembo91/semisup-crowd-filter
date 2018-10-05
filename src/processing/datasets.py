@@ -28,7 +28,6 @@ class SiameseDatagen(Sequence):
     def __len__(self):
         counter = 0
         for key in self.imsdict:
-            #print(self.listims[key])
             counter += len(self.imsdict[key])
         return counter // self.bs
     
@@ -43,7 +42,6 @@ class SiameseDatagen(Sequence):
     
     def load_image(self, path):
         img = Image.open(path)
-        img.show()
         img = img.convert('RGB')
         img = img.resize((self.imsize, self.imsize))
         img = np.asarray(img) / 255
@@ -63,7 +61,6 @@ class SiameseDatagen(Sequence):
             neg_im = self.load_image(negim)
             pos_im = self.load_image(posim)
             
-            #img = np.moveaxis(img, -1, 0)
             batch_anc = np.vstack((batch_anc, anc_im))
             batch_img = np.vstack((batch_img, pos_im))
             batch_anc = np.vstack((batch_anc, anc_im))
@@ -84,7 +81,7 @@ class SiameseDatagen(Sequence):
         indicies = self.indexes[self.bs//2 * idx : self.bs//2 * (idx + 1)]
         return self.generate_batch(indicies)
 
-def ClfDatagen(datapath, augment = True, batch_size=16, imsize=224):
+def generate_data_set(datapath, augment, batch_size=16, imsize=224):
     if augment:
         datagen = ImageDataGenerator(
             rescale=1./255,
@@ -98,8 +95,8 @@ def ClfDatagen(datapath, augment = True, batch_size=16, imsize=224):
         )
     generator = datagen.flow_from_directory(
         datapath,
-        target_size=(imsize, imsize),
         batch_size=batch_size,
+        target_size=imsize,
         class_mode='categorical'
     )
     return generator
