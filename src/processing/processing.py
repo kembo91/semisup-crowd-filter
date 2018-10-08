@@ -1,34 +1,41 @@
 import os
 from src.processing.datasets import SiameseDatagen, generate_data_set
 
-def process_data(path, method, batch_size, imsize):
+def process_data(train_path, test_path, method, batch_size, imsize):
     method = method.lower()
     if method == 'siam' or method == 'siamese':
         train_dataset = SiameseDatagen(
-            os.path.join(path, 'train'),
+            train_path,
             batch_size=batch_size,
             imsize=imsize
         )
         test_dataset = SiameseDatagen(
-            os.path.join(path, 'test'),
+            test_path,
             batch_size=batch_size,
             imsize=imsize
         )
         return train_dataset, test_dataset
     elif method is 'class' or method is 'classification':
         train_dataset = generate_data_set(
-            os.path.join(path, 'train'),
+            train_path,
             augment=True,
             batch_size=batch_size,
             imsize=imsize
         )
         test_dataset = generate_data_set(
-            os.path.join(path, 'test'),
+            test_path,
             augment=False,
             batch_size=batch_size,
             imsize=imsize
         )
         return train_dataset, test_dataset
+    elif method == 'gan' or method == 'gand':
+        train_dataset = Gan_Dataset(
+            
+        )
+        test_dataset = Gan_Dataset(
+
+        )
     else:
         raise ValueError(
             'Provided method {} is not supported'.format(method)

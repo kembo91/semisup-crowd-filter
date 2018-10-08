@@ -5,6 +5,7 @@ from keras.layers import Input, Dense, Conv2D, MaxPooling2D, UpSampling2D, Lambd
 
 from src.utils.utils import euclidean_distance
 from src.utils.losses import contrastive_loss
+from src.models.gan import Adversarial_Model
 
 def generate_model(method, type, path):
     if path is not '':
@@ -15,7 +16,7 @@ def generate_model(method, type, path):
     elif method == 'class' or method == 'classification':
         return create_class_model(type)
     elif method == 'gan' or method == 'gand':
-        return create_gan_model(type)
+        return Adversarial_Model()
     raise ValueError(
         'Specified method {} is not supported'.format(method)
     )

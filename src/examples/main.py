@@ -1,3 +1,4 @@
+import keras
 import argparse
 
 from src.processing.processing import process_data
@@ -33,19 +34,22 @@ parser.add_argument('--epochs', help='training epochs',
 def main():
     args = parser.parse_args()
     train_gen, test_gen = process_data(
-            dataset, 
-            method, 
-            batch_size, 
-            imsize
+            args.train_path,
+            args.val_path,
+            args.method,
+            args.batch_size,
+            args.imsize
     )
-    model = generate_model(method, arch, args.modelpath)
+    model = generate_model(args.method, args.arch, args.modelpath)
 
-    if args.train and args.modelpath is '':    
-        model = train(model, train_gen, test_gen,
+    if args.train and args.modelpath is '':
+        model = train(args.method, model, train_gen, test_gen,
                         args.epochs, args.savepath)
-    elif args.modelpath is not None:
-        model = keras.load_model(args.modelpath)
-        
+    elif args.modelpath is not '':
+        model = keras.models.load_model(args.modelpath)
+    else:
+        raise ValueError('Without training, path to pretrained model ' +
+                        'not provided')
     dev_gen = generate_data_set(args.dev_data, False, args.batch_size,
                                 args.imsize)
     eval_cs_model(model, dev_gen, test_gen)
