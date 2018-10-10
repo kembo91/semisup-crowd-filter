@@ -67,5 +67,3 @@ def create_class_model(type, num_classes=8):
 def create_gan_model(type):
     print('gan model to be done')
     
-#def create_gan_model(type):
-    

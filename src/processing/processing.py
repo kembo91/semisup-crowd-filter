@@ -15,7 +15,7 @@ def process_data(train_path, test_path, method, batch_size, imsize):
             imsize=imsize
         )
         return train_dataset, test_dataset
-    elif method is 'class' or method is 'classification':
+    elif method is 'class' or method is 'classification' or method is 'gan' or method is 'gand':
         train_dataset = generate_data_set(
             train_path,
             augment=True,
@@ -29,14 +29,6 @@ def process_data(train_path, test_path, method, batch_size, imsize):
             imsize=imsize
         )
         return train_dataset, test_dataset
-    elif method == 'gan' or method == 'gand':
-        train_dataset = Gan_Dataset(
-            
-        )
-        test_dataset = Gan_Dataset(
-
-        )
-    else:
-        raise ValueError(
-            'Provided method {} is not supported'.format(method)
-        )
+    raise ValueError(
+        'Provided method {} is not supported'.format(method)
+    )

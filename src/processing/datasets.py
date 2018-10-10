@@ -7,17 +7,8 @@ from keras.utils import Sequence
 from keras.preprocessing.image import ImageDataGenerator
 from collections import defaultdict
 
-class GanDataset(Sequence):
-    def __init__(self, datadir, batch_size=16, imsize=224, augment=True):
-        self.datadir = datadir
-        self.batch_size = batch_size
-        self.imsize = imsize
-        self.augment = augment
-        print('TODO')
-
-    def __len__(self):
-        return ()
-
+from functools import reduce
+   
 class SiameseDatagen(Sequence):
     def __init__(self, datadir, batch_size = 16, imsize = 224, augment=True):
         self.datadir = datadir
