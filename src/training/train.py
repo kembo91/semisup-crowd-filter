@@ -39,26 +39,45 @@ def train_gan(model, train_set, val_set, epochs, savepath):
         path, monitor='val_loss', save_best_only=True
     )
     losses = {"d":[], "g":[]}
+    #train discriminator
     for epoch in tqdm(range(epochs)):
         for ix in range(len(train_set)):
             image_batch = train_set[ix][0]
             batch_size = image_batch.shape[0]
-            noise = np.random.uniform(0, 1, size=[batch_size, 100])
+            noise = np.random.normal(0, 1, size=[batch_size, 100])
             generated_batch = model.G.predict(noise)
 
             X = np.concatenate((image_batch, generated_batch))
-            y = np.zeros([2*batch_size, 1])
+            y = np.zeros([2*batch_size])
             y[0:batch_size] = 1
             y[batch_size:] = 0
 
             d_loss = model.D.train_on_batch(X, y)
             losses['d'].append(d_loss)
             
-            noise_tr = np.random.uniform(0, 1, size=[batch_size, 100])
-            y2 = np.zeros([batch_size, 1])
-            
+            #noise_tr = np.random.normal(0, 1, size=[batch_size, 100])
+            #y2 = np.zeros([batch_size])
+
+    for epoch in tqdm(range(epochs)):
+        for ix in range(len(train_set)):
+            image_batch = train_set[ix][0]
+            batch_size = image_batch.shape[0]
+            noise = np.random.normal(0, 1, size=[batch_size, 100])
+            generated_batch = model.G.predict(noise)
 
 
-        
+            X = np.concatenate((image_batch, generated_batch))
+            y = np.zeros([2*batch_size])
+            y[0:batch_size] = 1
+            y[batch_size:] = 0
+
+            g_loss = model.GAN.train_on_batch(X, y)
+            losses['g'].append(g_loss)
+
+    return model
+
+
+
+
     model = keras.models.load_model(path)
     return model
