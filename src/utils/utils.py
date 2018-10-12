@@ -4,6 +4,11 @@ import numpy as np
 
 import keras.backend as K
 
+def schedule(epoch, lr):
+    if (epoch + 1) % 10 == 0:
+        lr = lr * 1e-1
+    return lr
+
 def euclidean_distance(vects):
     x, y = vects
     sum_square = K.sum(K.square(x - y), axis=1, keepdims=True)

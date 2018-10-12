@@ -15,7 +15,7 @@ def process_data(train_path, test_path, method, batch_size, imsize):
             imsize=imsize
         )
         return train_dataset, test_dataset
-    elif method is 'class' or method is 'classification' or method is 'gan' or method is 'gand':
+    elif method == 'class' or method == 'classification' or method == 'gan' or method == 'gand':
         train_dataset = generate_data_set(
             train_path,
             augment=True,

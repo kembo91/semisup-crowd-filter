@@ -6,6 +6,7 @@ from src.training.train import train
 from src.models.model import generate_model
 from src.validation.validate import eval_cs_model
 from src.processing.datasets import generate_data_set
+
 parser = argparse.ArgumentParser(description='Semisupervised large image dataset filtering for crowdsourced classification')
 
 parser.add_argument('--method', help='data filtering method, choose one: ALL, siamese, GAN, GANM, baseline',
@@ -29,7 +30,7 @@ parser.add_argument('--imsize', help='image resize size',
 parser.add_argument('--train', help='requires training',
                     action='store_true', default=False)
 parser.add_argument('--epochs', help='training epochs',
-                    default=40)
+                    default=150)
 
 def main():
     args = parser.parse_args()
@@ -53,7 +54,6 @@ def main():
     dev_gen = generate_data_set(args.dev_data, False, args.batch_size,
                                 args.imsize)
     eval_cs_model(model, dev_gen, test_gen)
-        
 
 if __name__ == '__main__':
     main()

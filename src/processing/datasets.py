@@ -98,7 +98,7 @@ def generate_data_set(datapath, augment, batch_size=16, imsize=224):
     generator = datagen.flow_from_directory(
         datapath,
         batch_size=batch_size,
-        target_size=imsize,
+        target_size=(imsize, imsize),
         class_mode='categorical'
     )
     return generator
