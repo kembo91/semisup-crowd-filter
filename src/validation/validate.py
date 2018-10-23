@@ -9,7 +9,7 @@ def eval_cs_model(model, dev_gen, anchordata=None):
         predicted_labels = process_baseline(model, dev_gen, anchordata)
     else:
         predicted_labels = process_gan(model, dev_gen)
-
+    
     precision = precision_score(true_labels, predicted_labels)
     recall = recall_score(true_labels, predicted_labels)
     f1 = f1_score(true_labels, predicted_labels)

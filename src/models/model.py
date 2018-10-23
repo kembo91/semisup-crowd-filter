@@ -1,6 +1,6 @@
 import keras
 import keras.backend as K
-from keras.models import Model, load_model
+from keras.models import Model, load_model, Sequential
 from keras.layers import Input, Dense, Conv2D, MaxPooling2D, UpSampling2D, Lambda, Flatten, Reshape, Conv2DTranspose, GlobalMaxPool2D
 
 from src.utils.utils import euclidean_distance
@@ -65,5 +65,4 @@ def create_class_model(type, num_classes=8):
     return model
 
 def create_gan_model(type):
-    print('gan model to be done')
-    
+    print('gan model to be done') 

@@ -1,5 +1,6 @@
 import keras
 import argparse
+import os
 
 from src.processing.processing import process_data
 from src.training.train import train
@@ -24,16 +25,19 @@ parser.add_argument('--savepath', help='path where to save trained model',
 parser.add_argument('--modelpath', help='path to trained model',
                     default='')
 parser.add_argument('--batch_size', help='training batch size',
-                    default=16)
+                    default=16, type=int)
 parser.add_argument('--imsize', help='image resize size',
                     default=224)
 parser.add_argument('--train', help='requires training',
                     action='store_true', default=False)
 parser.add_argument('--epochs', help='training epochs',
-                    default=150)
+                    default=150, type=int)
+parser.add_argument('--gpu', help='gpu device to use',
+                    default="0")
 
 def main():
     args = parser.parse_args()
+    os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
     train_gen, test_gen = process_data(
             args.train_path,
             args.val_path,
