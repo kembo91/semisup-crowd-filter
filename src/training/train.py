@@ -19,11 +19,11 @@ def train(method, model, train_set, val_set, epochs, savepath):
         return train_gan(model, train_set, val_set, epochs, savepath)
 
 def train_classic(model, train_set, val_set, epochs, savepath):
-    path = 'checkpoints/{}'.format(savepath) + '/res_'
+    path = 'checkpoints/{}'.format(savepath)
     if not os.path.exists(path):
         os.makedirs(path)
     checkpointer = ModelCheckpoint(
-        path, monitor='val_loss', save_best_only=True
+        path + '/model_', monitor='val_loss', save_best_only=True
     )
     scheduler = LearningRateScheduler(schedule, verbose = 1)
     model.fit_generator(
