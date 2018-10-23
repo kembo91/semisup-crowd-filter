@@ -19,7 +19,7 @@ def train(method, model, train_set, val_set, epochs, savepath):
         return train_gan(model, train_set, val_set, epochs, savepath)
 
 def train_classic(model, train_set, val_set, epochs, savepath):
-    path = 'checkpoints/{}'.format(savepath)
+    path = 'checkpoints/{}'.format(savepath) + '/res_'
     if not os.path.exists(path):
         os.makedirs(path)
     checkpointer = ModelCheckpoint(
