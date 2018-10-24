@@ -26,14 +26,15 @@ def train_classic(model, train_set, val_set, epochs, savepath):
         path + '/model_', monitor='val_loss', save_best_only=True
     )
     scheduler = LearningRateScheduler(schedule, verbose = 1)
+    model.summary()
     model.fit_generator(
         train_set,
         validation_data=val_set,
-        steps_per_epoch=200,
+        steps_per_epoch=len(train_set),
         epochs=epochs,
         callbacks=[checkpointer]
     )
-    model = keras.models.load_model(path)
+    model = keras.models.load_model(path + '/model_')
     return model
 
 def train_gan(model, train_set, val_set, epochs, savepath):
