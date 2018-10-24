@@ -33,7 +33,7 @@ def train_classic(model, train_set, val_set, epochs, savepath):
         epochs=epochs,
         #callbacks=[checkpointer]
     )
-    model.save(path + '/model')
+    model.save_weights(path + '/model')
     return model
 
 def train_gan(model, train_set, val_set, epochs, savepath):

@@ -8,19 +8,21 @@ from src.utils.losses import contrastive_loss
 from src.models.gan import Adversarial_Model
 
 def generate_model(method, type, path):
-    if path is not '':
-        model = load_model(path)
-        return model
-    elif method == 'siam' or method == 'siamese':
-        return create_siam_model(type)
+    if method == 'siam' or method == 'siamese':
+        model = create_siam_model(type)
     elif method == 'class' or method == 'classification':
-        return create_class_model(type)
+        model = create_class_model(type)
     elif method == 'gan' or method == 'gand':
-        return Adversarial_Model()
-    raise ValueError(
-        'Specified method {} is not supported'.format(method)
-    )
-        
+        model = Adversarial_Model()
+    else:
+        raise ValueError(
+            'Specified method {} is not supported'.format(method)
+        )
+    if path is not '':
+        model.load_weights(path)
+        return model
+    return model
+
 def get_pretrained_model(type):
     type = type.lower()
     if 'resnet' in type:
@@ -65,4 +67,4 @@ def create_class_model(type, num_classes=8):
     return model
 
 def create_gan_model(type):
-    print('gan model to be done') 
+    print('gan model to be done')

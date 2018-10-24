@@ -16,6 +16,4 @@ def eval_cs_model(model, dev_gen, anchordata=None):
 
     print('precision: {} \n recall: {} \n f1 score: {} \n'.format(
         precision, recall, f1
-    ))
-    
-    
+    )) 

@@ -55,7 +55,7 @@ def main():
     else:
         raise ValueError('Without training, path to pretrained model ' +
                         'not provided')
-    dev_gen = generate_data_set(args.dev_data, False, args.batch_size,
+    dev_gen = generate_data_set(args.dev_path, False, args.batch_size,
                                 args.imsize)
     eval_cs_model(model, dev_gen, test_gen)
 
