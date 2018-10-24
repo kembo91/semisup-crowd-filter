@@ -23,18 +23,17 @@ def train_classic(model, train_set, val_set, epochs, savepath):
     if not os.path.exists(path):
         os.makedirs(path)
     checkpointer = ModelCheckpoint(
-        path + '/model_', monitor='val_loss', save_best_only=True
+        path + '/model', monitor='val_loss', save_best_only=True
     )
     scheduler = LearningRateScheduler(schedule, verbose = 1)
-    model.summary()
     model.fit_generator(
         train_set,
         validation_data=val_set,
         steps_per_epoch=len(train_set),
         epochs=epochs,
-        callbacks=[checkpointer]
+        #callbacks=[checkpointer]
     )
-    model = keras.models.load_model(path + '/model_')
+    model.save(path + '/model')
     return model
 
 def train_gan(model, train_set, val_set, epochs, savepath):
