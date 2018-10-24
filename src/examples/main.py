@@ -51,7 +51,7 @@ def main():
         model = train(args.method, model, train_gen, test_gen,
                         args.epochs, args.savepath)
     elif args.modelpath is not '':
-        model = keras.models.load_model(args.modelpath)
+        model.load_weights(args.modelpath)
     else:
         raise ValueError('Without training, path to pretrained model ' +
                         'not provided')
