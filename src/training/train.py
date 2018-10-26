@@ -33,8 +33,8 @@ def train_classic(model, train_set, val_set, epochs, savepath):
         epochs=epochs,
         #callbacks=[checkpointer]
     )
-    model.save_weights(path + '/model')
-    return model
+    model.layers[2].save_weights(path + '/model')
+    return model.layers[2]
 
 def train_gan(model, train_set, val_set, epochs, savepath):
     path = 'checkpoints/{}'.format(savepath)

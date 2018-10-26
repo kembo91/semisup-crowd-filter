@@ -57,6 +57,8 @@ def main():
                         'not provided')
     dev_gen = generate_data_set(args.dev_path, False, args.batch_size,
                                 args.imsize)
+    test_gen = generate_data_set(args.val_path, False, args.batch_size,
+                                args.imsize)
     eval_cs_model(model, dev_gen, test_gen)
 
 if __name__ == '__main__':

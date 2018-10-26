@@ -34,11 +34,7 @@ class OutlierDetector(object):
         return mean_dist
 
     def determine_connection(self, preds):
-        print('preds')
-        print(preds)
         distances = self.mean_dist.values()
-        print('distances')
-        print(distances)
         rv = []
         for item in preds:
             for center in self.centers:
